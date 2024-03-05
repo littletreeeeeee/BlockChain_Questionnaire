@@ -1,0 +1,17 @@
+D:\碩專\Web\DecryptAnswer\bin\Debug\net6.0-windows\DecryptAnswer.exe
+D:\碩專\Web\DecryptAnswer\bin\Debug\net6.0-windows\DecryptAnswer.deps.json
+D:\碩專\Web\DecryptAnswer\bin\Debug\net6.0-windows\DecryptAnswer.runtimeconfig.json
+D:\碩專\Web\DecryptAnswer\bin\Debug\net6.0-windows\DecryptAnswer.dll
+D:\碩專\Web\DecryptAnswer\bin\Debug\net6.0-windows\DecryptAnswer.pdb
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.csproj.AssemblyReference.cache
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.Form1.resources
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.csproj.GenerateResource.cache
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.GeneratedMSBuildEditorConfig.editorconfig
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.AssemblyInfoInputs.cache
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.AssemblyInfo.cs
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.csproj.CoreCompileInputs.cache
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.dll
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\refint\DecryptAnswer.dll
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.pdb
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\DecryptAnswer.genruntimeconfig.cache
+D:\碩專\Web\DecryptAnswer\obj\Debug\net6.0-windows\ref\DecryptAnswer.dll
