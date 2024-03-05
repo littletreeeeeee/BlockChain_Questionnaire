@@ -1,0 +1,1639 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fido2.Models</name>
+    </assembly>
+    <members>
+        <member name="T:Fido2NetLib.AssertionOptions">
+            <summary>
+            Sent to the browser when we want to Assert credentials and authenticate a user
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.Challenge">
+            <summary>
+            This member represents a challenge that the selected authenticator signs, along with other data, when producing an authentication assertion.See the §13.1 Cryptographic Challenges security consideration.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.Timeout">
+            <summary>
+            This member specifies a time, in milliseconds, that the caller is willing to wait for the call to complete. This is treated as a hint, and MAY be overridden by the client.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.RpId">
+            <summary>
+            This OPTIONAL member specifies the relying party identifier claimed by the caller.If omitted, its value will be the CredentialsContainer object’s relevant settings object's origin's effective domain
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.AllowCredentials">
+            <summary>
+            This OPTIONAL member contains a list of PublicKeyCredentialDescriptor objects representing public key credentials acceptable to the caller, in descending order of the caller’s preference(the first item in the list is the most preferred credential, and so on down the list)
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.UserVerification">
+            <summary>
+            This member describes the Relying Party's requirements regarding user verification for the get() operation. Eligible authenticators are filtered to only those capable of satisfying this requirement
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AssertionOptions.Extensions">
+            <summary>
+            This OPTIONAL member contains additional parameters requesting additional processing by the client and authenticator. For example, if transaction confirmation is sought from the user, then the prompt string might be included as an extension.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.AuthenticatorAssertionRawResponse">
+            <summary>
+            Transport class for AssertionResponse
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Base64Url">
+            <summary>
+            Helper class to handle Base64Url. Based on Carbon.Jose source code.
+            </summary>
+        </member>
+        <member name="M:Fido2NetLib.Base64Url.Encode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Converts arg data to a Base64Url encoded string.
+            </summary>
+        </member>
+        <member name="M:Fido2NetLib.Base64Url.Decode(System.ReadOnlySpan{System.Char})">
+            <summary>
+            Decodes a Base64Url encoded string to its raw bytes.
+            </summary>
+        </member>
+        <member name="M:Fido2NetLib.Base64Url.DecodeUtf8(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            Decodes a Base64Url encoded string to its raw bytes.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Base64UrlConverter">
+            <summary>
+            Custom Converter for encoding/encoding byte[] using Base64Url instead of default Base64.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE">
+            <summary>
+            CBOR Object Signing and Encryption RFC8152 https://tools.ietf.org/html/rfc8152
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE.Algorithm">
+            <summary>
+            COSE Algorithms https://www.iana.org/assignments/cose/cose.xhtml#algorithms
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.RS1">
+            <summary> 
+            RSASSA-PKCS1-v1_5 w/ SHA-1
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.RS512">
+            <summary> 
+            RSASSA-PKCS1-v1_5 w/ SHA-512
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.RS384">
+            <summary> 
+            RSASSA-PKCS1-v1_5 w/ SHA-384
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.RS256">
+            <summary> 
+            RSASSA-PKCS1-v1_5 w/ SHA-256
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.PS512">
+            <summary> 
+            RSASSA-PSS w/ SHA-512
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.PS384">
+            <summary> 
+            RSASSA-PSS w/ SHA-384
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.PS256">
+            <summary> 
+            RSASSA-PSS w/ SHA-256
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.ES512">
+            <summary> 
+            ECDSA w/ SHA-512
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.ES384">
+            <summary> 
+            ECDSA w/ SHA-384
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.EdDSA">
+            <summary> 
+            EdDSA
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.ES256">
+            <summary> 
+            ECDSA w/ SHA-256
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.Algorithm.ES256K">
+            <summary>
+            ECDSA using secp256k1 curve and SHA-256
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE.KeyCommonParameter">
+            <summary>
+            COSE Key Common Parameters https://www.iana.org/assignments/cose/cose.xhtml#key-common-parameters
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.Reserved">
+            <summary> 
+            This value is reserved
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.KeyType">
+            <summary> 
+            Identification of the key type	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.KeyId">
+            <summary> 
+            Key identification value - match to kid in message	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.Alg">
+            <summary> 
+            Key usage restriction to this algorithm	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.KeyOps">
+            <summary> 
+            Restrict set of permissible operations	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyCommonParameter.BaseIV">
+            <summary> 
+            Base IV to be XORed with Partial IVs	
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE.KeyTypeParameter">
+            <summary>
+            COSE Key Type Parameters https://www.iana.org/assignments/cose/cose.xhtml#key-type-parameters
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.Crv">
+            <summary> 
+            EC identifier
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.K">
+            <summary> 
+            Key Value	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.X">
+            <summary> 
+            x-coordinate	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.Y">
+            <summary> 
+            y-coordinate	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.N">
+            <summary> 
+            the RSA modulus n	
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyTypeParameter.E">
+            <summary> 
+            the RSA public exponent e	
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE.KeyType">
+            <summary>
+            COSE Key Types https://www.iana.org/assignments/cose/cose.xhtml#key-type
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyType.Reserved">
+            <summary> 
+            This value is reserved
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyType.OKP">
+            <summary> 
+            Octet Key Pair
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyType.EC2">
+            <summary> 
+            Elliptic Curve Keys w/ x- and y-coordinate pair
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyType.RSA">
+            <summary> 
+            RSA Key
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.KeyType.Symmetric">
+            <summary> 
+            Symmetric Keys
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.COSE.EllipticCurve">
+            <summary>
+            COSE Elliptic Curves https://www.iana.org/assignments/cose/cose.xhtml#elliptic-curves
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.Reserved">
+            <summary> 
+            This value is reserved
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.P256">
+            <summary> 
+            NIST P-256 also known as secp256r1
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.P384">
+            <summary> 
+            NIST P-384 also known as secp384r1
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.P521">
+            <summary> 
+            NIST P-521 also known as secp521r1
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.X25519">
+            <summary> 
+            X25519 for use w/ ECDH only
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.X448">
+            <summary> 
+            X448 for use w/ ECDH only
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.Ed25519">
+            <summary> 
+            Ed25519 for use w/ EdDSA only
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.Ed448">
+            <summary> 
+            Ed448 for use w/ EdDSA only
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.COSE.EllipticCurve.P256K">
+            <summary> 
+            secp256k1 (pending IANA - requested assignment 8)
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AssertionVerificationResult">
+            <summary>
+            Result of the MakeAssertion verification
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AttestationConveyancePreference">
+            <summary>
+            AttestationConveyancePreference.
+            https://w3c.github.io/webauthn/#attestation-convey
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AttestationConveyancePreference.None">
+            <summary>
+            This value indicates that the Relying Party is not interested in authenticator attestation. For example, in order to potentially avoid having to obtain user consent to relay identifying information to the Relying Party, or to save a roundtrip to an Attestation CA.
+            This is the default value.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AttestationConveyancePreference.Indirect">
+            <summary>
+            This value indicates that the Relying Party prefers an attestation conveyance yielding verifiable attestation statements, but allows the client to decide how to obtain such attestation statements. The client MAY replace the authenticator-generated attestation statements with attestation statements generated by an Anonymization CA, in order to protect the user’s privacy, or to assist Relying Parties with attestation verification in a heterogeneous ecosystem.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AttestationConveyancePreference.Direct">
+            <summary>
+            This value indicates that the Relying Party wants to receive the attestation statement as generated by the authenticator.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AttestationVerificationSuccess">
+            <summary>
+            Holds parsed credential data
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs">
+            <summary>
+            This is a dictionary containing the client extension output values for zero or more WebAuthn Extensions
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs.Example">
+            <summary>
+            This extension allows for passing of conformance tests
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs.AppID">
+            <summary>
+            This extension allows WebAuthn Relying Parties that have previously registered a credential using the legacy FIDO JavaScript APIs to request an assertion.
+            https://www.w3.org/TR/webauthn/#sctn-appid-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs.AuthenticatorSelection">
+            <summary>
+            This extension allows a WebAuthn Relying Party to guide the selection of the authenticator that will be leveraged when creating the credential. It is intended primarily for Relying Parties that wish to tightly control the experience around credential creation.
+            https://www.w3.org/TR/webauthn/#sctn-authenticator-selection-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs.Extensions">
+            <summary>
+            This extension enables the WebAuthn Relying Party to determine which extensions the authenticator supports.
+            https://www.w3.org/TR/webauthn/#sctn-supported-extensions-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientInputs.UserVerificationMethod">
+            <summary>
+            This extension enables use of a user verification method.
+            https://www.w3.org/TR/webauthn/#sctn-uvm-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientOutputs.Example">
+            <summary>
+            This extension allows for passing of conformance tests
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientOutputs.AppID">
+            <summary>
+            This extension allows WebAuthn Relying Parties that have previously registered a credential using the legacy FIDO JavaScript APIs to request an assertion.
+            https://www.w3.org/TR/webauthn/#sctn-appid-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientOutputs.AuthenticatorSelection">
+            <summary>
+            This extension allows a WebAuthn Relying Party to guide the selection of the authenticator that will be leveraged when creating the credential. It is intended primarily for Relying Parties that wish to tightly control the experience around credential creation.
+            https://www.w3.org/TR/webauthn/#sctn-authenticator-selection-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientOutputs.Extensions">
+            <summary>
+            This extension enables the WebAuthn Relying Party to determine which extensions the authenticator supports.
+            https://www.w3.org/TR/webauthn/#sctn-supported-extensions-extension
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.AuthenticationExtensionsClientOutputs.UserVerificationMethod">
+            <summary>
+            This extension enables use of a user verification method.
+            https://www.w3.org/TR/webauthn/#sctn-uvm-extension
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AuthenticatorAttachment">
+            <summary>
+            This enumeration’s values describe authenticators' attachment modalities. Relying Parties use this for two purposes:
+            to express a preferred authenticator attachment modality when calling navigator.credentials.create() to create a credential, and
+            to inform the client of the Relying Party's best belief about how to locate the managing authenticators of the credentials listed in allowCredentials when calling navigator.credentials.get().
+            </summary>
+            <remarks>
+            Note: An authenticator attachment modality selection option is available only in the [[Create]](origin, options, sameOriginWithAncestors) operation. The Relying Party may use it to, for example, ensure the user has a roaming credential for authenticating on another client device; or to specifically register a platform credential for easier reauthentication using a particular client device. The [[DiscoverFromExternalSource]](origin, options, sameOriginWithAncestors) operation has no authenticator attachment modality selection option, so the Relying Party SHOULD accept any of the user’s registered credentials. The client and user will then use whichever is available and convenient at the time.
+            https://w3c.github.io/webauthn/#attachment
+            </remarks>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorAttachment.Platform">
+            <summary>
+            This value indicates platform attachment
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorAttachment.CrossPlatform">
+            <summary>
+            This value indicates cross-platform attachment.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.AuthenticatorTransport">
+            <summary>
+            Authenticators may implement various transports for communicating with clients. This enumeration defines hints as to how clients might communicate with a particular authenticator in order to obtain an assertion for a specific credential. Note that these hints represent the WebAuthn Relying Party's best belief as to how an authenticator may be reached. A Relying Party may obtain a list of transports hints from some attestation statement formats or via some out-of-band mechanism; it is outside the scope of this specification to define that mechanism. 
+            https://w3c.github.io/webauthn/#transport
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorTransport.Usb">
+            <summary>
+            Indicates the respective authenticator can be contacted over removable USB.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorTransport.Nfc">
+            <summary>
+            Indicates the respective authenticator can be contacted over Near Field Communication (NFC).
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorTransport.Ble">
+            <summary>
+            Indicates the respective authenticator can be contacted over Bluetooth Smart(Bluetooth Low Energy / BLE)
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.AuthenticatorTransport.Internal">
+            <summary>
+            Indicates the respective authenticator is contacted using a client device-specific transport.These authenticators are not removable from the client device.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.PublicKeyCredentialDescriptor">
+            <summary>
+            This object contains the attributes that are specified by a caller when referring to a public key credential as an input parameter to the create() or get() methods. It mirrors the fields of the PublicKeyCredential object returned by the latter methods.
+            Lazy implementation of https://www.w3.org/TR/webauthn/#dictdef-publickeycredentialdescriptor
+            todo: Should add validation of values as specified in spec
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.PublicKeyCredentialDescriptor.Type">
+            <summary>
+            This member contains the type of the public key credential the caller is referring to.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.PublicKeyCredentialDescriptor.Id">
+            <summary>
+            This member contains the credential ID of the public key credential the caller is referring to.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Objects.PublicKeyCredentialDescriptor.Transports">
+            <summary>
+            This OPTIONAL member contains a hint as to how the client might communicate with the managing authenticator of the public key credential the caller is referring to.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.PublicKeyCredentialType">
+            <summary>
+            PublicKeyCredentialType.
+            https://w3c.github.io/webauthn/#enumdef-publickeycredentialtype
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.ResidentKeyRequirement">
+            <summary>
+            This enumeration’s values describe the Relying Party's requirements for client-side discoverable credentials (formerly known as resident credentials or resident keys).
+            https://w3c.github.io/webauthn/#enum-residentKeyRequirement
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.ResidentKeyRequirement.Required">
+            <summary>
+            The Relying Party requires a client-side discoverable credential. The client MUST return an error if a client-side discoverable credential cannot be created.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.ResidentKeyRequirement.Preferred">
+            <summary>
+            The Relying Party strongly prefers creating a client-side discoverable credential, but will accept a server-side credential. The client and authenticator SHOULD create a discoverable credential if possible. For example, the client SHOULD guide the user through setting up user verification if needed to create a discoverable credential. This takes precedence over the setting of userVerification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.ResidentKeyRequirement.Discouraged">
+            <summary>
+            The Relying Party prefers creating a server-side credential, but will accept a client-side discoverable credential. The client and authenticator SHOULD create a server-side credential if possible.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Objects.UserVerificationRequirement">
+            <summary>
+            A WebAuthn Relying Party may require user verification for some of its operations but not for others, and may use this type to express its needs.
+            https://w3c.github.io/webauthn/#enumdef-userverificationrequirement
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.UserVerificationRequirement.Required">
+            <summary>
+            This value indicates that the Relying Party requires user verification for the operation and will fail the operation if the response does not have the UV flag set.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.UserVerificationRequirement.Preferred">
+            <summary>
+            This value indicates that the Relying Party prefers user verification for the operation if possible, but will not fail the operation if the response does not have the UV flag set.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.Objects.UserVerificationRequirement.Discouraged">
+            <summary>
+            This value indicates that the Relying Party does not want user verification employed during the operation(e.g., in the interest of minimizing disruption to the user interaction flow).
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.Rp">
+            <summary>
+            
+            This member contains data about the Relying Party responsible for the request.
+            Its value’s name member is required.
+            Its value’s id member specifies the relying party identifier with which the credential should be associated.If omitted, its value will be the CredentialsContainer object’s relevant settings object's origin's effective domain.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.User">
+            <summary>
+            This member contains data about the user account for which the Relying Party is requesting attestation. 
+            Its value’s name, displayName and id members are required.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.Challenge">
+            <summary>
+            Must be generated by the Server (Relying Party)
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.PubKeyCredParams">
+            <summary>
+            This member contains information about the desired properties of the credential to be created. The sequence is ordered from most preferred to least preferred. The platform makes a best-effort to create the most preferred credential that it can.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.Timeout">
+            <summary>
+            This member specifies a time, in milliseconds, that the caller is willing to wait for the call to complete. This is treated as a hint, and MAY be overridden by the platform.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.Attestation">
+            <summary>
+            This member is intended for use by Relying Parties that wish to express their preference for attestation conveyance.The default is none.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.AuthenticatorSelection">
+            <summary>
+            This member is intended for use by Relying Parties that wish to select the appropriate authenticators to participate in the create() operation.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.ExcludeCredentials">
+            <summary>
+            This member is intended for use by Relying Parties that wish to limit the creation of multiple credentials for the same account on a single authenticator.The client is requested to return an error if the new credential would be created on an authenticator that also contains one of the credentials enumerated in this parameter.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CredentialCreateOptions.Extensions">
+            <summary>
+            This OPTIONAL member contains additional parameters requesting additional processing by the client and authenticator. For example, if transaction confirmation is sought from the user, then the prompt string might be included as an extension.
+            </summary>
+        </member>
+        <member name="M:Fido2NetLib.PubKeyCredParam.#ctor(Fido2NetLib.Objects.COSE.Algorithm,Fido2NetLib.Objects.PublicKeyCredentialType)">
+            <summary>
+            Constructs a PubKeyCredParam instance
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PubKeyCredParam.Type">
+            <summary>
+            The type member specifies the type of credential to be created.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PubKeyCredParam.Alg">
+            <summary>
+            The alg member specifies the cryptographic signature algorithm with which the newly generated credential will be used, and thus also the type of asymmetric key pair to be generated, e.g., RSA or Elliptic Curve.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.PublicKeyCredentialRpEntity">
+            <summary>
+            PublicKeyCredentialRpEntity 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PublicKeyCredentialRpEntity.Id">
+            <summary>
+            A unique identifier for the Relying Party entity, which sets the RP ID.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PublicKeyCredentialRpEntity.Name">
+            <summary>
+            A human-readable name for the entity. Its function depends on what the PublicKeyCredentialEntity represents:
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.AuthenticatorSelection">
+            <summary>
+            WebAuthn Relying Parties may use the AuthenticatorSelectionCriteria dictionary to specify their requirements regarding authenticator attributes.
+            https://w3c.github.io/webauthn/#dictionary-authenticatorSelection
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AuthenticatorSelection.AuthenticatorAttachment">
+            <summary>
+            If this member is present, eligible authenticators are filtered to only authenticators attached with the specified §5.4.5 Authenticator Attachment enumeration (enum AuthenticatorAttachment).
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AuthenticatorSelection.ResidentKey">
+            <summary>
+            Specifies the extent to which the Relying Party desires to create a client-side discoverable credential. For historical reasons the naming retains the deprecated “resident” terminology. The value SHOULD be a member of ResidentKeyRequirement but client platforms MUST ignore unknown values, treating an unknown value as if the member does not exist. If no value is given then the effective value is required if requireResidentKey is true or discouraged if it is false or absent.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AuthenticatorSelection.RequireResidentKey">
+            <summary>
+            This member describes the Relying Parties' requirements regarding resident credentials. If the parameter is set to true, the authenticator MUST create a client-side-resident public key credential source when creating a public key credential.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.AuthenticatorSelection.UserVerification">
+            <summary>
+            This member describes the Relying Party's requirements regarding user verification for the create() operation. Eligible authenticators are filtered to only those capable of satisfying this requirement.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2User.Name">
+            <summary>
+            Required. A human-friendly identifier for a user account. It is intended only for display, i.e., aiding the user in determining the difference between user accounts with similar displayNames. For example, "alexm", "alex.p.mueller@example.com" or "+14255551234". https://w3c.github.io/webauthn/#dictdef-publickeycredentialentity
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2User.Id">
+            <summary>
+            The user handle of the user account entity. To ensure secure operation, authentication and authorization decisions MUST be made on the basis of this id member, not the displayName nor name members
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2User.DisplayName">
+            <summary>
+            A human-friendly name for the user account, intended only for display. For example, "Alex P. Müller" or "田中 倫". The Relying Party SHOULD let the user choose this, and SHOULD NOT restrict the choice more than necessary.
+            </summary>
+        </member>
+        <member name="M:Fido2NetLib.Fido2Configuration.#ctor">
+            <summary>
+            Create the configuration for Fido2.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.Timeout">
+            <summary>
+            This member specifies a time, in milliseconds, that the caller is willing to wait for the call to complete. 
+            This is treated as a hint, and MAY be overridden by the client.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.TimestampDriftTolerance">
+            <summary>
+            TimestampDriftTolerance specifies a time in milliseconds that will be allowed for clock drift on a timestamped attestation.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.ChallengeSize">
+            <summary>
+            The size of the challenges sent to the client
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.ServerDomain">
+            <summary>
+            The effetive domain of the RP. Should be unique and will be used as the identity for the RP.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.ServerName">
+            <summary>
+            A human-friendly name of the RP.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.ServerIcon">
+            <summary>
+            A serialized URL which resolves to an image associated with the entity. For example, this could be a user’s avatar or a Relying Party's logo. This URL MUST be an a priori authenticated URL. Authenticators MUST accept and store a 128-byte minimum length for an icon member’s value. Authenticators MAY ignore an icon member’s value if its length is greater than 128 bytes. The URL’s scheme MAY be "data" to avoid fetches of the URL, at the cost of needing more storage.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.Origin">
+            <summary>
+            Server origin, including protocol host and port.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.Origins">
+            <summary>
+            Server origins, including protocol host and port.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.FullyQualifiedOrigins">
+            <summary>
+            Fully Qualified Server origins, generated automatically from Origins.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.MDSCacheDirPath">
+            <summary>
+            Metadata service cache directory path.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Fido2Configuration.UndesiredAuthenticatorMetadataStatuses">
+            <summary>
+            List of metadata statuses for an authenticator that should cause attestations to be rejected.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.AlternativeDescriptions">
+            <summary>
+            This descriptor contains description in alternative languages.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#alternativedescriptions-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.AlternativeDescriptions.IETFLanguageCodesMembers">
+            <summary>
+            Gets or sets alternative descriptions of the authenticator.
+            <para>
+            Contains IETF language codes as key (e.g. "ru-RU", "de", "fr-FR") and a localized description as value.
+            </para>
+            </summary>
+            <remarks>
+            Contains IETF language codes, defined by a primary language subtag, 
+            followed by a region subtag based on a two-letter country code from [ISO3166] alpha-2 (usually written in upper case).
+            <para>Each description SHALL NOT exceed a maximum length of 200 characters.</para>
+            <para>Description values can contain any UTF-8 characters.</para>
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.AuthenticatorStatus">
+            <summary>
+            Describes the status of an authenticator model as identified by its AAID and potentially some additional information (such as a specific attestation key).
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-service-v2.0-rd-20180702.html#authenticatorstatus-enum"/>
+            </remarks>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.NOT_FIDO_CERTIFIED">
+            <summary>
+            This authenticator is not FIDO certified. 
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED">
+            <summary>
+            This authenticator has passed FIDO functional certification. 
+            <para>
+            This certification scheme is phased out and will be replaced by FIDO_CERTIFIED_L1.
+            </para> 
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.USER_VERIFICATION_BYPASS">
+            <summary>
+            Indicates that malware is able to bypass the user verification. 
+            <para>This means that the authenticator could be used without the user's consent and potentially even without the user's knowledge.</para>
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.ATTESTATION_KEY_COMPROMISE">
+            <summary>
+            Indicates that an attestation key for this authenticator is known to be compromised.
+            </summary>
+            <remarks>
+            Additional data should be supplied, including the key identifier and the date of compromise, if known.
+            </remarks>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.USER_KEY_REMOTE_COMPROMISE">
+            <summary>
+            This authenticator has identified weaknesses that allow registered keys to be compromised and should not be trusted. 
+            <para>This would include both, e.g. weak entropy that causes predictable keys to be generated or side channels that allow keys or signatures to be forged, guessed or extracted.</para>
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.USER_KEY_PHYSICAL_COMPROMISE">
+            <summary>
+            This authenticator has known weaknesses in its key protection mechanism(s) that allow user keys to be extracted by an adversary in physical possession of the device.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.UPDATE_AVAILABLE">
+            <summary>
+            A software or firmware update is available for the device.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.REVOKED">
+            <summary>
+            The FIDO Alliance has determined that this authenticator should not be trusted.
+            </summary>
+            <remarks>
+            For example: if it is known to be a fraudulent product or contain a deliberate backdoor.
+            </remarks>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.SELF_ASSERTION_SUBMITTED">
+            <summary>
+            The authenticator vendor has completed and submitted the self-certification checklist to the FIDO Alliance. 
+            </summary>
+            <remarks>
+            If this completed checklist is publicly available, the URL will be specified in <see cref="P:Fido2NetLib.StatusReport.Url"/>. 
+            </remarks>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L1">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 1. This level is the more strict successor of FIDO_CERTIFIED.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L1plus">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 1+. This level is the more than level <see cref="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L1"/>.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L2">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 2. This level is more strict than level <see cref="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L1plus"/>.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L2plus">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 2+. This level is more strict than level <see cref="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L2"/>.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L3">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 3. This level is more strict than level <see cref="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L2plus"/>.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L3plus">
+            <summary>
+            The authenticator has passed FIDO Authenticator certification at level 3+. This level is more strict than level <see cref="F:Fido2NetLib.AuthenticatorStatus.FIDO_CERTIFIED_L3"/>.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.BiometricAccuracyDescriptor">
+            <summary>
+            The BiometricAccuracyDescriptor describes relevant accuracy/complexity aspects in the case of a biometric user verification method.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#biometricaccuracydescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricAccuracyDescriptor.SelfAttestedFRR">
+            <summary>
+            Gets or sets the false rejection rate.
+            <para>For example a FRR of 10% would be encoded as 0.1.</para>
+            </summary>
+            <remarks>
+             [ISO19795-1] for a single template, i.e. the percentage of verification transactions with truthful claims of identity that are incorrectly denied. 
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricAccuracyDescriptor.SelfAttestedFAR">
+            <summary>
+            Gets or sets the false acceptance rate.
+            <para>For example a FAR of 0.002% would be encoded as 0.00002.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricAccuracyDescriptor.MaxTemplates">
+            <summary>
+            Gets or sets the maximum number of alternative templates from different fingers allowed.
+            </summary>
+            <remarks>
+            For other modalities, multiple parts of the body that can be used interchangeably.
+            For example: 3 if the user is allowed to enroll up to 3 different fingers to a fingerprint based authenticator. 
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricAccuracyDescriptor.MaxRetries">
+            <summary>
+            Gets or sets the maximum number of false attempts before the authenticator will block this method (at least for some time).
+            <para>Zero (0) means it will never block.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricAccuracyDescriptor.BlockSlowdown">
+            <summary>
+            Gets or sets the enforced minimum number of seconds wait time after blocking (e.g. due to forced reboot or similar).
+            <para>Zero (0) means that this user verification method will be blocked either permanently or until an alternative user verification method succeeded.</para>
+            </summary>
+            <remarks>
+            All alternative user verification methods MUST be specified appropriately in the metadata in <see cref="P:Fido2NetLib.MetadataStatement.UserVerificationDetails"/>.
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.BiometricStatusReport">
+            <summary>
+            Contains the current BiometricStatusReport of one of the authenticator's biometric component.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-service-v2.0-rd-20180702.html#biometricstatusreport-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.CertLevel">
+            <summary>
+            Gets or sets the level of the biometric certification of this biometric component of the authenticator.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.Modality">
+            <summary>
+            Gets or sets a single USER_VERIFY constant indicating the modality of the biometric component.
+            </summary>
+            <remarks>
+            This is not a bit flag combination. 
+            This value MUST be non-zero and this value MUST correspond to one or more entries in field userVerificationDetails in the related Metadata Statement.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.EffectiveDate">
+            <summary>
+            Gets or sets a ISO-8601 formatted date since when the certLevel achieved, if applicable. 
+            <para>If no date is given, the status is assumed to be effective while present.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.CertificationDescriptor">
+            <summary>
+            Gets or sets the externally visible aspects of the Biometric Certification evaluation.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.CertificateNumber">
+            <summary>
+            Gets or sets the unique identifier for the issued Biometric Certification.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.CertificationPolicyVersion">
+            <summary>
+            Gets or sets the  version of the Biometric Certification Policy the implementation is Certified to.
+            </summary>
+            <remarks>
+            For example: "1.0.0".
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.BiometricStatusReport.CertificationRequirementsVersion">
+            <summary>
+            Gets or sets the version of the Biometric Requirements the implementation is certified to.
+            </summary>
+            <remarks>
+            For example: "1.0.0".
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.CodeAccuracyDescriptor">
+            <summary>
+            The CodeAccuracyDescriptor describes the relevant accuracy/complexity aspects of passcode user verification methods.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#codeaccuracydescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.CodeAccuracyDescriptor.Base">
+            <summary>
+            Gets or sets the numeric system base (radix) of the code, e.g.  10 in the case of decimal digits. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CodeAccuracyDescriptor.MinLength">
+            <summary>
+            Gets or sets the minimum number of digits of the given base required for that code, e.g. 4 in the case of 4 digits.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CodeAccuracyDescriptor.MaxRetries">
+            <summary>
+            Gets or sets the maximum number of false attempts before the authenticator will block this method (at least for some time).
+            <para>Zero (0) means it will never block.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.CodeAccuracyDescriptor.BlockSlowdown">
+            <summary>
+            Gets or sets the enforced minimum number of seconds wait time after blocking (e.g. due to forced reboot or similar). 
+            <para>Zero (0) means this user verification method will be blocked, either permanently or until an alternative user verification method method succeeded.</para> 
+            </summary>
+            <remarks>
+            All alternative user verification methods MUST be specified appropriately in the Metadata in <see cref="P:Fido2NetLib.MetadataStatement.UserVerificationDetails"/>.
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.DisplayPNGCharacteristicsDescriptor">
+            <summary>
+            The DisplayPNGCharacteristicsDescriptor describes a PNG image characteristics as defined in the PNG [PNG] spec for IHDR (image header) and PLTE (palette table)
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#displaypngcharacteristicsdescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Width">
+            <summary>
+            Gets or sets the image width.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Height">
+            <summary>
+            Gets or sets the image height.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.BitDepth">
+            <summary>
+            Gets or sets the bit depth - bits per sample or per palette index.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.ColorType">
+            <summary>
+            Gets or sets the color type defines the PNG image type.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Compression">
+            <summary>
+            Gets or sets the compression method used to compress the image data.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Filter">
+            <summary>
+            Gets or sets the filter method is the preprocessing method applied to the image data before compression.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Interlace">
+            <summary>
+            Gets or sets the interlace method is the transmission order of the image data.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.DisplayPNGCharacteristicsDescriptor.Plte">
+            <summary>
+            Gets or sets the palette (1 to 256 palette entries).
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.EcdaaTrustAnchor">
+            <summary>
+            Represents the the ECDAA attestation data.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#ecdaatrustanchor-dictionary"/>
+            <para>In the case of ECDAA attestation, the ECDAA-Issuer's trust anchor MUST be specified in this field.</para>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.X">
+            <summary>
+            Gets or sets a base64url encoding of the result of ECPoint2ToB of the ECPoint2 X=P2​x​​.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.Y">
+            <summary>
+            Gets or sets a base64url encoding of the result of ECPoint2ToB of the ECPoint2.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.C">
+            <summary>
+            Gets or sets a base64url encoding of the result of BigNumberToB(c).
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.SX">
+            <summary>
+            Gets or sets the base64url encoding of the result of BigNumberToB(sx).
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.SY">
+            <summary>
+            Gets or sets the base64url encoding of the result of BigNumberToB(sy).
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.EcdaaTrustAnchor.G1Curve">
+            <summary>
+            Gets or sets a name of the Barreto-Naehrig elliptic curve for G1.
+            <para>"BN_P256", "BN_P638", "BN_ISOP256", and "BN_ISOP512" are supported.</para>
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.ExtensionDescriptor">
+            <summary>
+            This descriptor contains an extension supported by the authenticator. 
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#extensiondescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.ExtensionDescriptor.Id">
+            <summary>
+            Gets or sets the identifier that identifies the extension.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.ExtensionDescriptor.Tag">
+            <summary>
+            Gets or sets the tag.
+            <para>This field may be empty.</para>
+            </summary>
+            <remarks>
+            The TAG of the extension if this was assigned. TAGs are assigned to extensions if they could appear in an assertion. 
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.ExtensionDescriptor.Data">
+            <summary>
+            Gets or sets arbitrary data further describing the extension and/or data needed to correctly process the extension. 
+            <para>This field may be empty.</para>
+            </summary>
+            <remarks>
+            This field MAY be missing or it MAY be empty.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.ExtensionDescriptor.Fail_If_Unknown">
+            <summary>
+            Gets or sets a value indication whether an unknown extensions must be ignored (<c>false</c>) or must lead to an error (<c>true</c>) when the extension is to be processed by the FIDO Server, FIDO Client, ASM, or FIDO Authenticator. 
+            </summary>
+            <remarks>
+            <list type="bullet">
+                <item>A value of false indicates that unknown extensions MUST be ignored.</item>
+                <item>A value of true indicates that unknown extensions MUST result in an error.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.MetadataBLOBPayload">
+            <summary>
+            Represents the MetadataBLOBPayload
+            </summary>
+            <remarks>
+            <see xref="https://fidoalliance.org/specs/mds/fido-metadata-service-v3.0-ps-20210518.html#metadata-blob-payload-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayload.LegalHeader">
+            <summary>
+            Gets or sets the legalHeader, if present, contains a legal guide for accessing and using metadata.
+            </summary>
+            <remarks>
+            This value MAY contain URL(s) pointing to further information, such as a full Terms and Conditions statement. 
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayload.Number">
+            <summary>   
+            Gets or sets the serial number of this UAF Metadata BLOB Payload. 
+            </summary>
+            <remarks>
+            Serial numbers MUST be consecutive and strictly monotonic, i.e. the successor BLOB will have a no value exactly incremented by one.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayload.NextUpdate">
+            <summary>
+            Gets or sets a formatted date (ISO-8601) when the next update will be provided at latest.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayload.Entries">
+            <summary>
+            Gets or sets a list of zero or more entries of <see cref="T:Fido2NetLib.MetadataBLOBPayloadEntry"/>.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayload.JwtAlg">
+            <summary>
+            The "alg" property from the original JWT header. Used to validate MetadataStatements.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.MetadataBLOBPayloadEntry">
+            <summary>
+            Represents the metadata BLOB payload data strucutre.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/mds/fido-metadata-service-v3.0-ps-20210518.html#metadata-blob-payload-entry-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.Aaid">
+            <summary>
+            Gets or sets the AAID.
+            <para>The AAID of the authenticator this metadata BLOB payload entry relates to.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.AaGuid">
+            <summary>
+            Gets or sets the AAGUID.
+            <para>The Authenticator Attestation GUID.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.AttestationCertificateKeyIdentifiers">
+            <summary>
+            Gets or sets a list of the attestation certificate public key identifiers encoded as hex string.
+            </summary>
+            <remarks>
+            <list type="bullet">
+                <item>The hex string must not contain any non-hex characters (e.g. spaces).</item>
+                <item>All hex letters must be lower case.</item>
+                <item>This field must be set if neither aaid nor aaguid are set.</item>
+                <item>Setting this field implies that the attestation certificate(s) are dedicated to a single authenticator model.</item>
+            </list>
+            <para>FIDO U2F authenticators do not support AAID nor AAGUID, but they use attestation certificates dedicated to a single authenticator model.</para>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.MetadataStatement">
+            <summary>
+            Gets or sets the metadata statement.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.BiometricStatusReports">
+            <summary>
+            Gets or sets the status of the FIDO Biometric Certification of one or more biometric components of the Authenticator.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.StatusReports">
+            <summary>
+            Gets or sets an array of status reports applicable to this authenticator.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.TimeOfLastStatusChange">
+            <summary>
+            Gets or sets ISO-8601 formatted date since when the status report array was set to the current value. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.RogueListURL">
+            <summary>
+            Gets or sets an URL of a list of rogue (i.e. untrusted) individual authenticators. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataBLOBPayloadEntry.RogueListHash">
+            <summary>
+            Gets or sets the hash value computed of <see cref="P:Fido2NetLib.MetadataBLOBPayloadEntry.RogueListURL"/>.
+            </summary>
+            <remarks>
+            This hash value must be present and non-empty whenever rogueListURL is present.
+            </remarks>
+        </member>
+        <member name="M:Fido2NetLib.MetadataBLOBPayloadEntry.GetLatestStatusReport">
+            <summary>
+            Gets the latest, most current status report for the authenticator.
+            </summary>
+            <returns>Latest status report, or null if there are no reports.</returns>
+        </member>
+        <member name="T:Fido2NetLib.MetadataStatement">
+            <summary>
+            Represents the metadata statement.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#metadata-keys"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.LegalHeader">
+            <summary>
+            Gets or sets the legalHeader, if present, contains a legal guide for accessing and using metadata, which itself MAY contain URL(s) pointing to further information, such as a full Terms and Conditions statement. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Aaid">
+            <summary>
+            Gets or set the Authenticator Attestation ID.
+            </summary>
+            <remarks>
+            Note: FIDO UAF Authenticators support AAID, but they don't support AAGUID.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AaGuid">
+            <summary>
+            Gets or sets the Authenticator Attestation GUID. 
+            </summary>
+            <remarks>
+            This field MUST be set if the authenticator implements FIDO 2. 
+            <para>Note: FIDO 2 Authenticators support AAGUID, but they don't support AAID.</para>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AttestationCertificateKeyIdentifiers">
+            <summary>
+            Gets or sets a list of the attestation certificate public key identifiers encoded as hex string.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Description">
+            <summary>
+            Gets or sets a human-readable, short description of the authenticator, in English. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.IETFLanguageCodesMembers">
+            <summary>
+            Gets or set a list of human-readable short descriptions of the authenticator in different languages.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AuthenticatorVersion">
+            <summary>
+            Gets or set earliest (i.e. lowest) trustworthy authenticatorVersion meeting the requirements specified in this metadata statement. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.ProtocolFamily">
+            <summary>
+            Gets or set the FIDO protocol family.
+            <para>The values "uaf", "u2f", and "fido2" are supported.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Schema">
+            <summary>
+            The Metadata Schema version
+            Metadata schema version defines what schema of the metadata statement is currently present.The schema version of this version of the specification is 3.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Upv">
+            <summary>
+            Gets or sets the FIDO unified protocol version(s) (related to the specific protocol family) supported by this authenticator.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AuthenticationAlgorithms">
+            <summary>
+            Gets or sets the list of authentication algorithms supported by the authenticator. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.PublicKeyAlgAndEncodings">
+            <summary>
+            Gets or sets the list of public key formats supported by the authenticator during registration operations.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AttestationTypes">
+            <summary>
+            Gets or sets the supported attestation type(s).
+            </summary>
+            <remarks>
+            For example: TAG_ATTESTATION_BASIC_FULL(0x3E07), TAG_ATTESTATION_BASIC_SURROGATE(0x3E08). 
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.UserVerificationDetails">
+            <summary>
+            Gets or sets a list of alternative VerificationMethodANDCombinations.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.KeyProtection">
+            <summary>
+            Gets or sets a 16-bit number representing the bit fields defined by the KEY_PROTECTION constants.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.IsKeyRestricted">
+            <summary>
+            Gets or sets a value indicating whether the Uauth private key is restricted by the authenticator to only sign valid FIDO signature assertions.
+            </summary>
+            <remarks>
+            <list type="bullet">
+                <item>This entry is set to true, if the Uauth private key is restricted by the authenticator to only sign valid FIDO signature assertions.</item>
+                <item>This entry is set to false, if the authenticator doesn't restrict the Uauth key to only sign valid FIDO signature assertions. In this case, the calling application could potentially get any hash value signed by the authenticator.</item>
+                <item>If this field is missing, the assumed value is isKeyRestricted=true.</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.IsFreshUserVerificationRequired">
+            <summary>
+            Gets or sets a value indicating whether the Uauth key usage always requires a fresh user verification.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.MatcherProtection">
+            <summary>
+            Gets or sets a 16-bit number representing the bit fields defined by the MATCHER_PROTECTION constants.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.CryptoStrength">
+            <summary>
+            Gets or sets the authenticator's overall claimed cryptographic strength in bits (sometimes also called security strength or security level).
+            </summary>
+            <remarks>If this value is absent, the cryptographic strength is unknown.</remarks>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AttachmentHint">
+            <summary>
+            Gets or sets a 32-bit number representing the bit fields defined by the ATTACHMENT_HINT constants.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.TcDisplay">
+            <summary>
+            Gets or sets a 16-bit number representing a combination of the bit flags defined by the TRANSACTION_CONFIRMATION_DISPLAY constants.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.TcDisplayContentType">
+            <summary>
+            Gets or sets the supported MIME content type [RFC2049] for the transaction confirmation display, such as text/plain or image/png. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.TcDisplayPNGCharacteristics">
+            <summary>
+            Gets or sets a list of alternative DisplayPNGCharacteristicsDescriptor.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.AttestationRootCertificates">
+            <summary>
+            Gets or sets a list of a PKIX [RFC5280] X.509 certificate that is a valid trust anchor for this authenticator model.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.EcdaaTrustAnchors">
+            <summary>
+            Gets or set a list of trust anchors used for ECDAA attestation. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Icon">
+            <summary>
+            Gets or set a data: url [RFC2397] encoded PNG [PNG] icon for the Authenticator.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.SupportedExtensions">
+            <summary>
+            Gets or sets a list of extensions supported by the authenticator. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.MetadataStatement.Hash">
+            <summary>
+            Gets or sets a computed hash value of this <see cref="T:Fido2NetLib.MetadataStatement"/>.
+            <para>NOTE: This supports the internal infrastructure of Fido2Net and isn't intented to be used by user code.</para>
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.PatternAccuracyDescriptor">
+            <summary>
+            The PatternAccuracyDescriptor describes relevant accuracy/complexity aspects in the case that a pattern is used as the user verification method.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#patternaccuracydescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.PatternAccuracyDescriptor.MinComplexity">
+            <summary>
+            Gets or sets the number of possible patterns (having the minimum length) out of which exactly one would be the right one, i.e. 1/probability in the case of equal distribution.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PatternAccuracyDescriptor.MaxRetries">
+            <summary>
+            Gets or sets maximum number of false attempts before the authenticator will block authentication using this method (at least temporarily). 
+            <para>Zero (0) means it will never block.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.PatternAccuracyDescriptor.BlockSlowdown">
+            <summary>
+            Gets or sets the enforced minimum number of seconds wait time after blocking (due to forced reboot or similar mechanism).
+            <para>Zero (0) means this user verification method will be blocked, either permanently or until an alternative user verification method method succeeded.</para>
+            </summary>
+            <remarks>
+            All alternative user verification methods MUST be specified appropriately in the metadata under userVerificationDetails.
+            </remarks>
+        </member>
+        <member name="T:Fido2NetLib.RgbPaletteEntry">
+            <summary>
+            The rgbPaletteEntry is an RGB three-sample tuple palette entry.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#rgbpaletteentry-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.RgbPaletteEntry.R">
+            <summary>
+            Gets or sets the red channel sample value.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.RgbPaletteEntry.G">
+            <summary>
+            Gets or sets the green channel sample value.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.RgbPaletteEntry.B">
+            <summary>
+            Gets or sets the blue channel sample value.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.StatusReport">
+            <summary>
+            Contains an AuthenticatorStatus and additional data associated with it, if any.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-service-v2.0-rd-20180702.html#statusreport-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.Status">
+            <summary>
+            Gets or sets the status of the authenticator.
+            <para>Additional fields may be set depending on this value.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.EffectiveDate">
+            <summary>
+            Gets or set the ISO-8601 formatted date since when the status code was set, if applicable.
+            <para>If no date is given, the status is assumed to be effective while present.</para>
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.Certificate">
+            <summary>
+            Gets or sets Base64-encoded PKIX certificate value related to the current status, if applicable.
+            </summary>
+            <remarks>
+            Base64-encoded [RFC4648] (not base64url!) / DER [ITU-X690-2008] PKIX certificate.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.Url">
+            <summary>
+            Gets or sets the HTTPS URL where additional information may be found related to the current status, if applicable.
+            </summary>
+            <remarks>
+            For example a link to a web page describing an available firmware update in the case of status <see cref="F:Fido2NetLib.AuthenticatorStatus.UPDATE_AVAILABLE"/>, or a link to a description of an identified issue in the case of status <see cref="F:Fido2NetLib.AuthenticatorStatus.USER_VERIFICATION_BYPASS"/>.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.CertificationDescriptor">
+            <summary>
+            Gets or sets a description of the externally visible aspects of the Authenticator Certification evaluation. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.CertificateNumber">
+            <summary>
+            Gets or sets the unique identifier for the issued Certification.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.CertificationPolicyVersion">
+            <summary>
+            Gets or set the version of the Authenticator Certification Policy the implementation is Certified to. 
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.StatusReport.CertificationRequirementsVersion">
+            <summary>
+            Gets or set the version of the Authenticator Security Requirements the implementation is Certified to.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.UafVersion">
+            <summary>
+            Represents a generic version with major and minor fields.
+            </summary>
+            <remarks>
+            https://fidoalliance.org/specs/fido-uaf-v1.2-rd-20171128/fido-uaf-protocol-v1.2-rd-20171128.html#version-interface
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.UafVersion.Major">
+            <summary>
+            Major version
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.UafVersion.Minor">
+            <summary>
+            Minor version
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.UserVerificationMethods">
+             User Verification Methods Short Form
+            
+             The USER_VERIFY constants are flags in a bitfield represented as a 32 bit long integer. They describe the methods and capabilities of an UAF authenticator for locally verifying a user. The operational details of these methods are opaque to the server. These constants are used in the authoritative metadata for an authenticator, reported and queried through the UAF Discovery APIs, and used to form authenticator policies in UAF protocol messages.
+            
+             https://fidoalliance.org/specs/fido-uaf-v1.0-ps-20141208/fido-uaf-reg-v1.0-ps-20141208.html#user-verification-methods
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.PRESENCE_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator is able to confirm user presence in any fashion. If this flag and no other is set for user verification, the guarantee is only that the authenticator cannot be operated without some human intervention, not necessarily that the presence verification provides any level of authentication of the human's identity. (e.g. a device that requires a touch to activate)
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.FINGERPRINT_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses any type of measurement of a fingerprint for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.PASSCODE_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses a local-only passcode (i.e. a passcode not known by the server) for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.VOICEPRINT_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses a voiceprint (also known as speaker recognition) for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.FACEPRINT_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses any manner of face recognition to verify the user.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.LOCATION_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses any form of location sensor or measurement for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.EYEPRINT_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses any form of eye biometrics for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.PATTERN_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses a drawn pattern for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.HANDPRINT_INTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses any measurement of a full hand (including palm-print, hand geometry or vein geometry) for user verification.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.PASSCODE_EXTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses a local-only passcode (i.e. a passcode not known by the server) for user verification that might be gathered outside the authenticator boundary.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.PATTERN_EXTERNAL">
+            <summary>
+            This flag must be set if the authenticator uses a drawn pattern for user verification that might be gathered outside the authenticator boundary.
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.NONE">
+            <summary>
+            This flag must be set if the authenticator will respond without any user interaction (e.g. Silent Authenticator).
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.UserVerificationMethods.ALL">
+            <summary>
+            If an authenticator sets multiple flags for user verification types, it may also set this flag to indicate that all verification methods will be enforced (e.g. faceprint AND voiceprint). If flags for multiple user verification methods are set and this flag is not set, verification with only one is necessary (e.g. fingerprint OR passcode).
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.VerificationMethodDescriptor">
+            <summary>
+            A descriptor for a specific base user verification method as implemented by the authenticator.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-metadata-statement-v2.0-rd-20180702.html#verificationmethoddescriptor-dictionary"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.VerificationMethodDescriptor.UserVerificationMethod">
+            <summary>
+            Gets or sets a single USER_VERIFY constant, not a bit flag combination. 
+            </summary>
+            <remarks>
+            This value MUST be non-zero.
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.VerificationMethodDescriptor.CaDesc">
+            <summary>
+            Gets or sets a may optionally be used in the case of method USER_VERIFY_PASSCODE.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.VerificationMethodDescriptor.BaDesc">
+            <summary>
+            Gets or sets a may optionally be used in the case of method USER_VERIFY_FINGERPRINT, USER_VERIFY_VOICEPRINT, USER_VERIFY_FACEPRINT, USER_VERIFY_EYEPRINT, or USER_VERIFY_HANDPRINT.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.VerificationMethodDescriptor.PaDesc">
+            <summary>
+            Gets or sets a may optionally be used in case of method USER_VERIFY_PATTERN.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.KeyProtection">
+             Key Protection Types Short Form
+            
+             The KEY_PROTECTION constants are flags in a bit field represented as a 16 bit long integer. They describe the method an authenticator uses to protect the private key material for FIDO registrations. Refer to [UAFAuthnrCommands] for more details on the relevance of keys and key protection. These constants are used in the authoritative metadata for an authenticator, reported and queried through the UAF Discovery APIs, and used to form authenticator policies in UAF protocol messages.
+            
+             https://fidoalliance.org/specs/fido-uaf-v1.0-ps-20141208/fido-uaf-reg-v1.0-ps-20141208.html#key-protection-types
+             type {Object}
+        </member>
+        <member name="F:Fido2NetLib.KeyProtection.SOFTWARE">
+            <summary>
+            This flag must be set if the authenticator uses software-based key management. Exclusive in authenticator metadata with KEY_PROTECTION_HARDWARE, KEY_PROTECTION_TEE, KEY_PROTECTION_SECURE_ELEMENT
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.KeyProtection.HARDWARE">
+            <summary>
+            This flag should be set if the authenticator uses hardware-based key management. Exclusive in authenticator metadata with KEY_PROTECTION_SOFTWARE
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.KeyProtection.TEE">
+            <summary>
+            This flag should be set if the authenticator uses the Trusted Execution Environment [TEE] for key management. In authenticator metadata, this flag should be set in conjunction with KEY_PROTECTION_HARDWARE. Exclusive in authenticator metadata with KEY_PROTECTION_SOFTWARE, KEY_PROTECTION_SECURE_ELEMENT
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.KeyProtection.SECURE_ELEMENT">
+            <summary>
+            This flag should be set if the authenticator uses a Secure Element [SecureElement] for key management. In authenticator metadata, this flag should be set in conjunction with KEY_PROTECTION_HARDWARE. Exclusive in authenticator metadata with KEY_PROTECTION_TEE, KEY_PROTECTION_SOFTWARE
+            </summary>
+        </member>
+        <member name="F:Fido2NetLib.KeyProtection.REMOTE_HANDLE">
+            <summary>
+            This flag must be set if the authenticator does not store (wrapped) UAuth keys at the client, but relies on a server-provided key handle. This flag must be set in conjunction with one of the other KEY_PROTECTION flags to indicate how the local key handle wrapping key and operations are protected. Servers may unset this flag in authenticator policy if they are not prepared to store and return key handles, for example, if they have a requirement to respond indistinguishably to authentication attempts against userIDs that do and do not exist. Refer to [UAFProtocol] for more details.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.Version">
+            <summary>
+            Version represents a generic version with major and minor fields.
+            </summary>
+            <remarks>
+            <see href="https://fidoalliance.org/specs/fido-uaf-v1.2-rd-20171128/fido-uaf-protocol-v1.2-rd-20171128.html#version-interface"/>
+            </remarks>
+        </member>
+        <member name="P:Fido2NetLib.Version.Major">
+            <summary>
+            Major version.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.Version.Minor">
+            <summary>
+            Minor version.
+            </summary>
+        </member>
+        <member name="T:Fido2NetLib.UndesiredMetdatataStatusFido2VerificationException">
+            <summary>
+            Exception thrown when a new attestation comes from an authenticator with a current reported security issue.
+            </summary>
+        </member>
+        <member name="P:Fido2NetLib.UndesiredMetdatataStatusFido2VerificationException.StatusReport">
+            <summary>
+            Status report from the authenticator that caused the attestation to be rejected.
+            </summary>
+        </member>
+    </members>
+</doc>
